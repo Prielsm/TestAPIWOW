@@ -48,6 +48,14 @@ namespace TestCallWowAPI
             return request.ToString();
         }
 
+        /// <summary>
+        /// Call the creature index directly
+        /// </summary>
+        /// <param name="token">The token.</param>
+        /// <param name="region">The region.</param>
+        /// <param name="requiredNamespace">The required namespace.</param>
+        /// <param name="locale">The locale.</param>
+        /// <returns></returns>
         public static string GetCreatureIndex2(string token, string region, string requiredNamespace, string locale)
         {
             string html = "";
