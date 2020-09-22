@@ -25,7 +25,16 @@ namespace TestCallWowAPI
             // Get the access token
             token = GetAccessToken("b6b4ab532cb245c28315b1b2c606166b", "6Qw6ncBG8cQJBiPiuD2HihmrIbYUEzqE");
 
-            await SearchCreature("static-us", "en_US", "Dog");
+            // Recherche sur la table créature
+            var resSearch = await SearchCreature("static-us", "en_US", "Cat");
+
+            if (resSearch != null)
+            {
+                foreach (Result result in resSearch.results)
+                {
+                    Console.WriteLine("Name: " + result.data.name.fr_FR + " /Is tameable: " + result.data.is_tameable + " /Type: " + result.data.type.name.fr_FR);
+                }
+            }
 
             // Récupèration des types de créature
             var res = await GetCreatureIndex("static-us", "en_US");
@@ -34,7 +43,7 @@ namespace TestCallWowAPI
             {
                 foreach (CreatureType creatureType in res.creature_types)
                 {
-                    Console.WriteLine("Name: " + creatureType.name + " /Type: " + creatureType.key);
+                    Console.WriteLine("Name: " + creatureType.name);
                 }
             }
 
@@ -79,11 +88,14 @@ namespace TestCallWowAPI
 
             var content = await response.Content.ReadAsStringAsync();
 
-            RootCreatureType result = JsonConvert.DeserializeObject<RootCreatureType>(content);
-            if (result.creature_types != null && result.creature_types.Count > 0)
+            if (content != null)
             {
-                Console.WriteLine("Récupération des types de créatures OK");
-                return result;
+                RootCreatureType result = JsonConvert.DeserializeObject<RootCreatureType>(content);
+                if (result.creature_types != null && result.creature_types.Count > 0)
+                {
+                    Console.WriteLine("Récupération des types de créatures OK");
+                    return result;
+                }
             }
 
             Console.WriteLine("Récupération des types de créatures KO");
@@ -116,11 +128,14 @@ namespace TestCallWowAPI
 
             var content = await response.Content.ReadAsStringAsync();
 
-            PaginatedResult result = JsonConvert.DeserializeObject<PaginatedResult>(content);
-            if (result.results != null && result.results.Count > 0)
+            if (content != null)
             {
-                Console.WriteLine("Récupération des résultats de la recherche OK");
-                return result;
+                PaginatedResult result = JsonConvert.DeserializeObject<PaginatedResult>(content);
+                if (result.results != null && result.results.Count > 0)
+                {
+                    Console.WriteLine("Récupération des résultats de la recherche OK");
+                    return result;
+                }
             }
 
             Console.WriteLine("Récupération des résultats de la recherche KO");
