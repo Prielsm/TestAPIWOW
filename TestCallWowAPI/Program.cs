@@ -23,12 +23,22 @@ namespace TestCallWowAPI
             // Get the access token
             token = GetAccessToken("b6b4ab532cb245c28315b1b2c606166b", "6Qw6ncBG8cQJBiPiuD2HihmrIbYUEzqE");
 
+            // Récupèration des types de créature
             var res = await GetCreatureIndex("us", "static-us", "en_US");
+
+            if (res != null)
+            {
+                foreach (CreatureType creatureType in res.creature_types)
+                {
+                    Console.WriteLine("Name: " + creatureType.name + " /Type: " + creatureType.key);
+                }
+            }
 
         }
 
         public static string GetAccessToken(string clientId, string clientSecret)
         {
+            Console.WriteLine("Début de la récupération du token");
             var client = new RestClient("https://eu.battle.net/oauth/token");
             var request = new RestRequest(Method.POST);
             request.AddHeader("cache-control", "no-cache");
@@ -38,19 +48,20 @@ namespace TestCallWowAPI
 
             var tokenResponse = JsonConvert.DeserializeObject<AccessTokenResponse>(response.Content);
 
+            Console.WriteLine("Fin de la récupération du token");
             return tokenResponse.access_token;
         }
 
         /// <summary>
         /// Call the creature index directly
         /// </summary>
-        /// <param name="token">The token.</param>
         /// <param name="region">The region.</param>
         /// <param name="requiredNamespace">The required namespace.</param>
         /// <param name="locale">The locale.</param>
-        /// <returns></returns>
-        public static async Task<string> GetCreatureIndex( string region, string requiredNamespace, string locale)
+        /// <returns>The creature types</returns>
+        public static async Task<RootCreatureType> GetCreatureIndex( string region, string requiredNamespace, string locale)
         {
+            Console.WriteLine("Début de la récupération des types de créatures");
             UriBuilder uriBuilder = new UriBuilder("https://us.api.blizzard.com/");
             uriBuilder.Path = $"data/wow/creature-type/index";
             var query = HttpUtility.ParseQueryString(uriBuilder.Query);
@@ -64,7 +75,15 @@ namespace TestCallWowAPI
 
             var content = await response.Content.ReadAsStringAsync();
 
-            return content;
+            RootCreatureType result = JsonConvert.DeserializeObject<RootCreatureType>(content);
+            if (result.creature_types != null && result.creature_types.Count > 0)
+            {
+                Console.WriteLine("Récupération des types de créatures OK");
+                return result;
+            }
+
+            Console.WriteLine("Récupération des types de créatures KO");
+            return null;
         }
 
         /// <summary>
