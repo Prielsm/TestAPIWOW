@@ -17,14 +17,18 @@ namespace TestCallWowAPI
     {
         public static string token = "";
         private static readonly HttpClient httpClient = new HttpClient();
+        public const string baseTokenURL = "https://us.battle.net/oauth/token";
+        public const string baseURL = "https://us.api.blizzard.com/";
 
         static async Task Main(string[] args)
         {
             // Get the access token
             token = GetAccessToken("b6b4ab532cb245c28315b1b2c606166b", "6Qw6ncBG8cQJBiPiuD2HihmrIbYUEzqE");
 
+            await SearchCreature("static-us", "en_US", "Dog");
+
             // Récupèration des types de créature
-            var res = await GetCreatureIndex("us", "static-us", "en_US");
+            var res = await GetCreatureIndex("static-us", "en_US");
 
             if (res != null)
             {
@@ -39,7 +43,7 @@ namespace TestCallWowAPI
         public static string GetAccessToken(string clientId, string clientSecret)
         {
             Console.WriteLine("Début de la récupération du token");
-            var client = new RestClient("https://eu.battle.net/oauth/token");
+            var client = new RestClient(baseTokenURL);
             var request = new RestRequest(Method.POST);
             request.AddHeader("cache-control", "no-cache");
             request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -59,10 +63,10 @@ namespace TestCallWowAPI
         /// <param name="requiredNamespace">The required namespace.</param>
         /// <param name="locale">The locale.</param>
         /// <returns>The creature types</returns>
-        public static async Task<RootCreatureType> GetCreatureIndex( string region, string requiredNamespace, string locale)
+        public static async Task<RootCreatureType> GetCreatureIndex(string requiredNamespace, string locale)
         {
             Console.WriteLine("Début de la récupération des types de créatures");
-            UriBuilder uriBuilder = new UriBuilder("https://us.api.blizzard.com/");
+            UriBuilder uriBuilder = new UriBuilder(baseURL);
             uriBuilder.Path = $"data/wow/creature-type/index";
             var query = HttpUtility.ParseQueryString(uriBuilder.Query);
             query["namespace"] = requiredNamespace;
@@ -83,6 +87,43 @@ namespace TestCallWowAPI
             }
 
             Console.WriteLine("Récupération des types de créatures KO");
+            return null;
+        }
+
+        /// <summary>
+        /// Call the creature index directly
+        /// </summary>
+        /// <param name="region">The region.</param>
+        /// <param name="requiredNamespace">The required namespace.</param>
+        /// <param name="locale">The locale.</param>
+        /// <returns>The creature types</returns>
+        public static async Task<PaginatedResult> SearchCreature(string requiredNamespace, string locale, string name = null, string orderBy = "id", string sortOrder = "desc", int page = 1)
+        {
+            Console.WriteLine("Début de la recherche sur les créatures");
+            UriBuilder uriBuilder = new UriBuilder(baseURL);
+            uriBuilder.Path = $"data/wow/search/creature";
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+            query["namespace"] = requiredNamespace;
+            query["locale"] = locale;
+            query["orderby"] = orderBy + ":" + sortOrder;
+            query["_page"] = page.ToString();
+            query["name.en_US"] = name;
+            uriBuilder.Query = query.ToString();
+
+            var request = CreateHttpRequest(HttpMethod.Get, uriBuilder.Uri);
+
+            var response = httpClient.SendAsync(request).Result;
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            PaginatedResult result = JsonConvert.DeserializeObject<PaginatedResult>(content);
+            if (result.results != null && result.results.Count > 0)
+            {
+                Console.WriteLine("Récupération des résultats de la recherche OK");
+                return result;
+            }
+
+            Console.WriteLine("Récupération des résultats de la recherche KO");
             return null;
         }
 
