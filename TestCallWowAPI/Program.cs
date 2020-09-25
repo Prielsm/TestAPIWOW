@@ -17,8 +17,10 @@ namespace TestCallWowAPI
     {
         public static string token = "";
         private static readonly HttpClient httpClient = new HttpClient();
-        public const string baseTokenURL = "https://us.battle.net/oauth/token";
-        public const string baseURL = "https://us.api.blizzard.com/";
+        public const string baseTokenURL = "https://eu.battle.net/oauth/token";
+        public const string baseURL = "https://eu.api.blizzard.com/";
+        public const string staticNamespace = "static-eu";
+        public const string locale = "en_US";
 
         static async Task Main(string[] args)
         {
@@ -26,7 +28,7 @@ namespace TestCallWowAPI
             token = GetAccessToken("b6b4ab532cb245c28315b1b2c606166b", "6Qw6ncBG8cQJBiPiuD2HihmrIbYUEzqE");
 
             // Recherche sur la table créature
-            var resSearch = await SearchCreature("static-us", "en_US", "Cat");
+            var resSearch = await SearchCreature(staticNamespace, locale, "Cat");
 
             if (resSearch != null)
             {
@@ -35,13 +37,13 @@ namespace TestCallWowAPI
                     Console.WriteLine("Name: " + result.data.name.fr_FR + " /Is tameable: " + result.data.is_tameable + " /Type: " + result.data.type.name.fr_FR);
                 }
 
-                var resCreature = await GetCreatureById("static-us", "en_US", resSearch.results.FirstOrDefault().data.id);
+                var resCreature = await GetCreatureById(staticNamespace, locale, resSearch.results.FirstOrDefault().data.id);
                 Console.WriteLine("Créature récupérée:");
                 Console.WriteLine("Name: " + resCreature.name + "-Family: " + resCreature.family?.name + "-Type: " + resCreature.type?.name);
             }
 
             // Récupèration des types de créature
-            var res = await GetCreatureIndex("static-us", "en_US");
+            var res = await GetCreatureIndex(staticNamespace, locale);
 
             if (res != null)
             {
