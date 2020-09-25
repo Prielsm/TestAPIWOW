@@ -62,4 +62,15 @@ namespace TestCallWowAPI.Models
         public int pageCount { get; set; }
         public List<Result> results { get; set; }
     }
+
+    public class Creature
+    {
+        public Links _links { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public CreatureType type { get; set; }
+        public Family family { get; set; }
+        public List<CreatureDisplay> creature_displays { get; set; }
+        public bool is_tameable { get; set; }
+    }
 }

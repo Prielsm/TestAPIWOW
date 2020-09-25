@@ -34,6 +34,10 @@ namespace TestCallWowAPI
                 {
                     Console.WriteLine("Name: " + result.data.name.fr_FR + " /Is tameable: " + result.data.is_tameable + " /Type: " + result.data.type.name.fr_FR);
                 }
+
+                var resCreature = await GetCreatureById("static-us", "en_US", resSearch.results.FirstOrDefault().data.id);
+                Console.WriteLine("Créature récupérée:");
+                Console.WriteLine("Name: " + resCreature.name + "-Family: " + resCreature.family?.name + "-Type: " + resCreature.type?.name);
             }
 
             // Récupèration des types de créature
@@ -139,6 +143,44 @@ namespace TestCallWowAPI
             }
 
             Console.WriteLine("Récupération des résultats de la recherche KO");
+            return null;
+        }
+
+
+        /// <summary>
+        /// Gets the creature by identifier.
+        /// </summary>
+        /// <param name="requiredNamespace">The required namespace.</param>
+        /// <param name="locale">The locale.</param>
+        /// <param name="creatureId">The creature identifier.</param>
+        /// <returns></returns>
+        public static async Task<Creature> GetCreatureById(string requiredNamespace, string locale, int creatureId)
+        {
+            Console.WriteLine("Début de la recherche d'une créature via son ID");
+            UriBuilder uriBuilder = new UriBuilder(baseURL);
+            uriBuilder.Path = $"data/wow/creature/" + creatureId.ToString();
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+            query["namespace"] = requiredNamespace;
+            query["locale"] = locale;
+            uriBuilder.Query = query.ToString();
+
+            var request = CreateHttpRequest(HttpMethod.Get, uriBuilder.Uri);
+
+            var response = httpClient.SendAsync(request).Result;
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (content != null)
+            {
+                Creature result = JsonConvert.DeserializeObject<Creature>(content);
+                if (result != null)
+                {
+                    Console.WriteLine("Récupération de la créature OK");
+                    return result;
+                }
+            }
+
+            Console.WriteLine("Récupération de la créature KO");
             return null;
         }
 
