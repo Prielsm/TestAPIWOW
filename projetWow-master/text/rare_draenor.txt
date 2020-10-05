@@ -1,0 +1,41 @@
+Il y a quatre rares spawn nécessaires à la réalisation du haut fait Hellbane . 
+Les quatre monstres ont environ 30% de chances de laisser tomber le  médaillon de la légion et la  cage de fer à cliqueter . 
+
+La  cage de cliquetis ("Rattling Iron Cage) contient l'une des trois montures suivantes:
+ Armored Razorback
+ Tundra Icehoof
+ Warsong Direfang
+
+La monture que vous obtenez est aléatoire, mais vous obtenez toujours 1 monture de la cage.
+
+Deathtalon et les trois autres monstres rares ont tous un hurlement large à chaque fois qu'ils apparaissent. 
+(Les cris semblent être désynchronisés sur certains serveurs pour le moment, mais seront probablement corrigés dans les prochains jours). 
+Le cri de Deathtalon est: " Le seigneur des ombres Iskar crie: Derrière le voile, tout ce que vous trouvez, c'est la mort! "
+Les trois autres apparitions rares qui peuvent laisser tomber la cage de fer à cliquetis sont:
+Doomroller
+Terroriste
+Vengeance
+
+La minuterie de réapparition semble être exactement d'une heure. 
+(Mais j'ai également obtenu d'autres chiffres, donc cela sera mis à jour avec le temps d'apparition correct dans quelques jours).
+Vous obtenez uniquement du butin lors de votre premier kill de la journée. 
+Vous n'avez donc que quatre chances par jour à la cage de montage (si vous tuez les quatre rares).
+
+Voici les coordonnées TomTom pour tous ceux qui veulent les chasser:
+/way Tanaan Jungle 47, 52 Doomroller
+/way Tanaan Jungle 15,63 Terror fist
+/way Tanaan Jungle 32, 73 Vengence
+/way Tanaan Jungle 24 40 Deathtalon
+
+/way 47.0, 52.0 Doomroller 
+/way 15.0, 63.0 Terror fist 
+/way 32.0, 73.0 Vengence 
+/way 24.0, 40.0 Deathtalon
+
+Vengeance (32, 73) yells, "Tyrant Velhari yells: Insects deserve to be crushed!"
+
+Doomroller (47, 52) yells, "Siegemaster Mar'tak yells: Hah-ha! Trample their corpses!"
+
+Deathtalon (24 40) yells, "Shadow Lord Iskar yells: Behind the veil, all you find is death!"
+
+Terrorfist (15,63) yells, "Frogan yells: A massive gronnling is heading for Rangari Refuge! We are going to require some assistance!"

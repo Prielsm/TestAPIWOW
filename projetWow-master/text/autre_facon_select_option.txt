@@ -1,0 +1,60 @@
+1e FACON :
+
+<select
+          onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
+          name="Tutos"
+          id=""
+        >
+          <option value="">Choisir la région</option>
+          <option value="#givrefeu">Exploration de la Crête de Givrefeu</option>
+          <option value="#gorgrond">Exploration de Gorgrond</option>
+          <option value="#arak">Exploration des Flèches d'Arak</option>
+          <option value="#ombrelune">Exploration de la vallée d'Ombrelune</option>
+          <option value="#talador">Exploration de Talador</option>
+          <option value="#nagrand">Exploration de Nagrand</option>
+        </select>
+
+
+
+
+2e FACON:
+
+        <select>
+          <option value="">Choisir la région</option>
+          <option value="#givrefeu">Exploration de la Crête de Givrefeu</option>
+          <option value="#gorgrond">Exploration de Gorgrond</option>
+          <option value="#arak">Exploration des Flèches d'Arak</option>
+          <option value="#ombrelune"
+            >Exploration de la vallée d'Ombrelune</option
+          >
+          <option value="#talador">Exploration de Talador</option>
+          <option value="#nagrand">Exploration de Nagrand</option>
+        </select>
+        <script>
+          document
+            .querySelector("select")
+            .addEventListener("change", function (e) {
+              window.location = e.target.value;
+            });
+        </script>
+
+
+
+3e FACON:
+
+        <script>
+            function redirect() {
+                var select = document.getElementById("selectSectionDr");
+                var valueSelected = select.options[select.selectedIndex].value;
+
+                window.location.href = valueSelected;
+            }
+        </script>
+
+        <label for="selectSectionDr">Options:</label>
+        <select id="selectSectionDr">
+            <option value="#ombrelune">Ombrelune</option>
+            <option value="#secuDraenor">SecuDreanor</option>
+            <option value="#diploTanaan">DiploTanaan</option>
+        </select> 
+        <button type="button" onclick="redirect()">Explore!</button>

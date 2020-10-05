@@ -1,0 +1,40 @@
+/way Spires of Arak 50.9 12.6 Skettis
+/way Spires of Arak 36.5 44.4 The Writhing Mire
+/way Spires of Arak 57.9 55.2 Veil Zekk
+/way Spires of Arak 41.6 58.8 Southport
+/way Spires of Arak 50.5 46.9 Terrace of Dawn
+/way Spires of Arak 30.9 29.1 Bladefist Hold
+
+/way Spires of Arak 72.2 40.3 Lost Veil Anzu
+/way Spires of Arak 53.8 51.3 Ravenskar
+/way Spires of Arak 41.3 45.9 Axefall
+/way Spires of Arak 61.6 24.6 Howling Crag
+/way Spires of Arak 56.5 86.4 Pinchwhistle Point
+/way Spires of Arak 44.8 24.1 Veil Akraz
+
+/way Spires of Arak 47.4 52.6 Windswept Terrace
+/way Spires of Arak 60.8 45.1 Sethekk Hollow
+/way Spires of Arak 39.9 49.6 Admiral Taylor's Garrison
+/way Spires of Arak 61 70.3 Pinchwhistle Gearworks
+/way Spires of Arak 49 55.6 Bloodmane Valley
+
+
+Skettis
+Le bourbier Putride
+Voile Zekk
+Port-Austral
+Terrasse de l’Aube
+Bastion Lamepoing
+
+Voile perdu d’Anzu
+Brèche-aux-Corbeaux
+Tombe-Hache
+La combe Hurlante
+Poste de Sifflepince
+Voile Akraz
+
+Terrasse Souffle-Bise
+Creux des Sethekk
+Fief de l’amiral Taylor
+Boulonnerie de Sifflepince
+Vallée Crin-de-Sang

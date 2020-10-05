@@ -1,0 +1,209 @@
+body {
+  display: block;
+  text-align: center;
+  background-size: cover;
+  color: indianred;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 100px;
+}
+
+a {
+  text-decoration: none;
+  color: indianred;
+}
+
+a:hover {
+  box-shadow: 0px 0px 10px 1.5px indianred;
+  padding: 5px;
+}
+
+img {
+  width: 600px;
+  border: 2px solid lightgray;
+}
+
+.bodyDraenor {
+  background-image: url(images/pastel2.0.png);
+}
+
+.bodyIndex {
+  background-image: url(images/azsuna.jpg);
+  background-repeat: no-repeat;
+  color: palevioletred;
+}
+
+.bodyIndex header {
+  font-family: "JBCursive-V3";
+}
+
+.sectionIndex {
+  color: black;
+  background-color: rgba(255, 255, 255, 0.25);
+  text-align: left;
+  padding-left: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: larger;
+  border-radius: 20px;
+}
+
+.sectionDraenor {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 0px 10px 1.5px indianred;
+  padding: 10px;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+}
+
+.lienIndex {
+  color: black;
+}
+
+.bodyIndex header,
+.bodyDraenor header {
+  font-size: xx-large;
+  box-shadow: 0px 0px 10px 1.5px white;
+  border: 1px solid white;
+  color: white;
+  padding: 20px;
+  border-radius: 20px;
+  font-weight: bolder;
+  text-shadow: 1px 1px 20px white;
+}
+
+.carte_draenor {
+  box-shadow: 0px 0px 50px 10px white;
+  border: none;
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 15px;
+  box-shadow: 0px 0px 10px 1.5px grey;
+
+  position: fixed;
+  width: 100%;
+  background-image: url(images/pastel2.0.png);
+  background-size: contain;
+}
+
+.menu a {
+  color: white;
+  font-weight: bolder;
+  text-shadow: 1px 1px 10px black;
+  font-size: larger;
+}
+
+.input_pseudo {
+  margin-bottom: 50px;
+}
+
+.img_petite {
+  width: 200px;
+  border-radius: 100%;
+  box-shadow: 0px 0px 10px 1.5px indianred;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+.reput {
+  width: 25%;
+  box-shadow: 0px 0px 10px 1.5px indianred;
+  height: auto;
+  padding: 20px;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: center;
+}
+
+.d-flex a {
+  padding: 10px;
+}
+
+.d-flex div {
+  padding: 10px;
+}
+
+.fleche {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  font-size: 50px;
+  position: fixed;
+}
+
+.fleche a {
+  box-shadow: none;
+}
+
+.menu a {
+  box-shadow: none;
+}
+
+footer .d-flex a {
+  box-shadow: none;
+}
+
+footer .d-flex a:hover {
+  text-decoration: underline;
+}
+
+.removeShadow a {
+  box-shadow: none;
+}
+
+.secuDraenor {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.bodyIndex a:hover {
+  box-shadow: 0px 0px 10px 1.5px crimson;
+}
+
+.reput h1 {
+  border-bottom: 2px solid indianred;
+  width: auto;
+  padding-bottom: 20px;
+}
+
+/* Style page skins */
+
+.body_skins header {
+  color: black;
+  border-bottom: 2px solid black;
+}
+
+.body_skins {
+  padding: 20px;
+  padding-right: 50px;
+  padding-left: 50px;
+  margin: 0;
+  color: black;
+}
+
+.header_skins {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.body_skins a:hover {
+  box-shadow: none;
+}
+
+.main_skins section {
+  margin: 100px;
+  box-shadow: 0px 0px 3px 0.5px black;
+  padding: 50px;
+}
+
+.main_skins img {
+  width: 400px;
+}

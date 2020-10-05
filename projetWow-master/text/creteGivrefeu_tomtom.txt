@@ -1,0 +1,45 @@
+/way Frostfire Ridge 30 41 Bladespire Citadel
+/way Frostfire Ridge 41.7 19.8 Bloodmaul Stronghold
+/way Frostfire Ridge 82.5 60.4 Bones of Agurak
+/way Frostfire Ridge 58.3 31.4 Colossal's Fall
+/way Frostfire Ridge 44.6 31.2 Daggermaw Ravine
+
+/way Frostfire Ridge 31.2 23.5 Frostwind Crag
+/way Frostfire Ridge 65.4 47.3 Grimfrost Hill
+/way Frostfire Ridge 59.9 58.5 Grom'gar
+/way Frostfire Ridge 82 57.4 Iron Siegeworks
+/way Frostfire Ridge 74.7 61.2 Iron Waystation
+
+/way Frostfire Ridge 68 32 Magnarok
+/way Frostfire Ridge 46.4 52.2 Stonefang Outpost
+/way Frostfire Ridge 48.7 46.8 The Boneslag
+/way Frostfire Ridge 52.2 45.5 The Cracking Plains
+/way Frostfire Ridge 23.4 54.1 Wor'gol
+
+
+
+Citadelle de Flèchelame
+Bastion de la Masse-Sanglante
+Restes d’Agurak
+Trépas-du-Colosse
+Ravin des Crocs-Lames
+
+Combe de Givrevent
+Colline de Triste-Givre
+Grom’gar
+Atelier de siège de Fer
+Relais de Fer
+
+Magnarok
+Avant-poste Croc-de-Pierre
+Crâne-de-Lave
+Plaines Craquelées
+Wor’gol
+
+
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+/way Vallée d’Ombrelune:Draenor 41.9, 75.7 A l’ouest de la Cime de Socrethar, au bord du rivage.
+/way Vallée d’Ombrelune:Draenor 49.7, 71.8 Au pied de la Cime de Socrethar (nord-est)
+/way Vallée d’Ombrelune:Draenor 49.7, 71.9 Près d’un cristal Sombrepierre runique.
+/way Vallée d’Ombrelune:Draenor 50.7, 72.5 Au pied de la Cime de Socrethar, près du flanc de la montagne au sud-est.
+/way Vallée d’Ombrelune:Draenor 46.6, 70.0 Près des jeunes brocheperle à la Cime de Socrethar, au nord.
+/way Vallée d’Ombrelune:Draenor 43.5, 71.4 Face à une petite colline de la Cime de Socrethar, au nord-ouest.
+/way Vallée d’Ombrelune:Draenor 48.7, 69.9 Au pied d’un énorme rocher de la Cime de Socrethar, au nord.
+
+/way Flèches d’Arak 50.2, 5.8 Le point se situe au nord de Skettis.
+/way Flèches d’Arak 47.0, 20.1 Au bord d’un tout petit lac situé non loin de Skettis.
+/way Flèches d’Arak 60.8, 11.2 Près d’un arbre sur la rive droite de la rivière longeant Skettis.
+/way Flèches d’Arak 36.5, 18.2 Près de l’entrée Nord qui relie Talador aux Flèches d’arak.
+
+/way Talador 39.7, 55.4 A côté de deux arbres situés à l’ouest du chemin.
+/way Talador 47.0, 48.0 Dans la montagne qui surplombe le Quartier du Marché Sha’tari à Shattrath.
+/way Talador 51.9, 41.2 A côté d’un arbre situé au Nord du point de vol Shattrath.
+/way Talador 46.2, 52.6 A côté d’un camp gardé par le Golem frénétique.
+
+/way Nagrand:Draenor 40.5, 47.5 Au pied d’un grand arbre situé au bord de l’eau.
+/way Nagrand:Draenor 43.6, 31.4 Entre un arbre et un buisson au nord du Poste de garde de Mok’gol.
+/way Nagrand:Draenor 57.3, 26.7 Entre deux arbres situés au bord de la route.
+
+/way Crête de Givrefeu 51.0, 19.8 Au pied d’un rocher qui donne sur la mer.
+/way Crête de Givrefeu 52.3, 18.2 Juste à côté du point précédent, légèrement en contre-bas.
+/way Crête de Givrefeu 54.0, 17.0 Entre un arbre et un arbustre, proche de la mer.
+
+/way Gorgrond 51.0, 38.0 A la frontière entre le Chaudron du Vaporicien et de la Fosse.
+/way Gorgrond 56.0, 40.9 À l’ouest du lieu, au niveau des « flaques d’eau » en forme d’escalier.
+/way Gorgrond 54.0, 45.0 Dans un creux de la montagne en forme de cratère.

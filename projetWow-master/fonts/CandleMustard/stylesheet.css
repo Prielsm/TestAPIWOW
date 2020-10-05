@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Candle Mustard';
+    src: url('CandleMustard.eot');
+    src: url('CandleMustard.eot?#iefix') format('embedded-opentype'),
+        url('CandleMustard.woff2') format('woff2'),
+        url('CandleMustard.woff') format('woff'),
+        url('CandleMustard.ttf') format('truetype'),
+        url('CandleMustard.svg#CandleMustard') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

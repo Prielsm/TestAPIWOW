@@ -1,0 +1,36 @@
+/way Nagrand:Draenor 38.0 50.1 Ancestral Grounds
+/way Nagrand:Draenor 76.2 68.4 Gates of Grommashar
+/way Nagrand:Draenor 25.8 19.6 Highmaul Harbor
+/way Nagrand:Draenor 51.9 47.7 Lok-rath
+/way Nagrand:Draenor 42.7 41.4 Mok'gol Watchpost
+
+/way Nagrand:Draenor 69.2 64.2 Telaar
+/way Nagrand:Draenor 80.7 52.3 Ring of Trials
+/way Nagrand:Draenor 85.4 26.5 Zangar Shore
+/way Nagrand:Draenor 42.2 27.3 Broken Precipice
+/way Nagrand:Draenor 84.7 60.4 Hallvalor
+
+/way Nagrand:Draenor 41.6 69.4 Ironfist Harbor
+/way Nagrand:Draenor 80.4 67.3 Mar'gok's Overwatch
+/way Nagrand:Draenor 47 60.8 Oshu'gun
+/way Nagrand:Draenor 55.9 15.2 The Ring of Blood
+/way Nagrand:Draenor 73.0 20.6 Throne of the Elements
+
+
+Terres Ancestrales
+Portes de Grommashar
+Port de Cognefort
+Lok-Rath
+Poste de garde de Mok’gol
+
+Telaar
+Arène des Épreuves
+Rivage de Zangar
+Précipice Brisé
+Fort-Vaillance
+
+Port Poing-de-Fer
+Belvédère de Mar’gok
+Oshu’gun
+Arène de Sang
+Trône des éléments
