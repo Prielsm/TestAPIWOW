@@ -22,6 +22,10 @@ namespace TestCallWowAPI
         public const string staticNamespace = "static-eu";
         public const string locale = "en_US";
 
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
         static async Task Main(string[] args)
         {
             // Get the access token
