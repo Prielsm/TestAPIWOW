@@ -5,26 +5,60 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using System.Web;
 using TestCallWowAPI.Models;
 
 namespace TestCallWowAPI
 {
     class Program
     {
-        static void Main(string[] args)
+        public static string token = "";
+        private static readonly HttpClient httpClient = new HttpClient();
+        public const string baseTokenURL = "https://eu.battle.net/oauth/token";
+        public const string baseURL = "https://eu.api.blizzard.com/";
+        public const string staticNamespace = "static-eu";
+        public const string locale = "en_US";
+
+        static async Task Main(string[] args)
         {
             // Get the access token
-            var token = GetAccessToken("b6b4ab532cb245c28315b1b2c606166b", "6Qw6ncBG8cQJBiPiuD2HihmrIbYUEzqE");
+            token = GetAccessToken("b6b4ab532cb245c28315b1b2c606166b", "6Qw6ncBG8cQJBiPiuD2HihmrIbYUEzqE");
 
-            var res = GetCreatureIndex2(token, "us", "static-us", "en_US");
-            // var auctionFileURL = GetAuctionFileUrl(token, "eu", "Blackhand");
-            // var auctions = GetAuctions(auctionFileURL);
+            // Recherche sur la table créature
+            var resSearch = await SearchCreature(staticNamespace, locale, "Cat");
+
+            if (resSearch != null)
+            {
+                foreach (Result result in resSearch.results)
+                {
+                    Console.WriteLine("Name: " + result.data.name.fr_FR + " /Is tameable: " + result.data.is_tameable + " /Type: " + result.data.type.name.fr_FR);
+                }
+
+                var resCreature = await GetCreatureById(staticNamespace, locale, resSearch.results.FirstOrDefault().data.id);
+                Console.WriteLine("Créature récupérée:");
+                Console.WriteLine("Name: " + resCreature.name + "-Family: " + resCreature.family?.name + "-Type: " + resCreature.type?.name);
+            }
+
+            // Récupèration des types de créature
+            var res = await GetCreatureIndex(staticNamespace, locale);
+
+            if (res != null)
+            {
+                foreach (CreatureType creatureType in res.creature_types)
+                {
+                    Console.WriteLine("Name: " + creatureType.name);
+                }
+            }
 
         }
 
         public static string GetAccessToken(string clientId, string clientSecret)
         {
-            var client = new RestClient("https://eu.battle.net/oauth/token");
+            Console.WriteLine("Début de la récupération du token");
+            var client = new RestClient(baseTokenURL);
             var request = new RestRequest(Method.POST);
             request.AddHeader("cache-control", "no-cache");
             request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -33,69 +67,139 @@ namespace TestCallWowAPI
 
             var tokenResponse = JsonConvert.DeserializeObject<AccessTokenResponse>(response.Content);
 
+            Console.WriteLine("Fin de la récupération du token");
             return tokenResponse.access_token;
-        }
-
-        public static string GetCreatureIndex(string token, string region, string requiredNamespace, string locale)
-        {
-            var client = new RestClient("https://" + region + ".api.blizzard.com/data/wow/creature-family/index");
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("authorization", $"Bearer {token}");
-            request.AddHeader("namespace", requiredNamespace);
-            request.AddHeader("locale", locale);
-            IRestResponse response = client.Execute(request);
-
-            return request.ToString();
         }
 
         /// <summary>
         /// Call the creature index directly
         /// </summary>
-        /// <param name="token">The token.</param>
         /// <param name="region">The region.</param>
         /// <param name="requiredNamespace">The required namespace.</param>
         /// <param name="locale">The locale.</param>
-        /// <returns></returns>
-        public static string GetCreatureIndex2(string token, string region, string requiredNamespace, string locale)
+        /// <returns>The creature types</returns>
+        public static async Task<RootCreatureType> GetCreatureIndex(string requiredNamespace, string locale)
         {
-            string html = "";
-            string url = @"https://us.api.blizzard.com/data/wow/creature-family/index?namespace=static-us&locale=en_US&access_token=USut9r6uSXBwJKAe0llB0RPJAEhmaWmEky";
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.AutomaticDecompression = DecompressionMethods.GZip;
+            Console.WriteLine("Début de la récupération des types de créatures");
+            UriBuilder uriBuilder = new UriBuilder(baseURL);
+            uriBuilder.Path = $"data/wow/creature-type/index";
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+            query["namespace"] = requiredNamespace;
+            query["locale"] = locale;
+            uriBuilder.Query = query.ToString();
 
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-            using (Stream stream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(stream))
+            var request = CreateHttpRequest(HttpMethod.Get, uriBuilder.Uri);
+
+            var response = httpClient.SendAsync(request).Result;
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (content != null)
             {
-                html = reader.ReadToEnd();
+                RootCreatureType result = JsonConvert.DeserializeObject<RootCreatureType>(content);
+                if (result.creature_types != null && result.creature_types.Count > 0)
+                {
+                    Console.WriteLine("Récupération des types de créatures OK");
+                    return result;
+                }
             }
 
-            return html;
+            Console.WriteLine("Récupération des types de créatures KO");
+            return null;
         }
 
-        public static string GetAuctionFileUrl(string token, string region, string realm)
+        /// <summary>
+        /// Call the creature index directly
+        /// </summary>
+        /// <param name="region">The region.</param>
+        /// <param name="requiredNamespace">The required namespace.</param>
+        /// <param name="locale">The locale.</param>
+        /// <returns>The creature types</returns>
+        public static async Task<PaginatedResult> SearchCreature(string requiredNamespace, string locale, string name = null, string orderBy = "id", string sortOrder = "desc", int page = 1)
         {
-            string fileUrl;
-            var client = new RestClient("https://" + region + ".api.blizzard.com/wow/auction/data/" + realm);
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("cache-control", "no-cache");
-            request.AddHeader("content-type", "application/x-www-form-urlencoded");
-            request.AddHeader("authorization", $"Bearer {token}");
-            request.AddHeader("namespace", $"dynamic-eu");
-            IRestResponse response = client.Execute(request);
+            Console.WriteLine("Début de la recherche sur les créatures");
+            UriBuilder uriBuilder = new UriBuilder(baseURL);
+            uriBuilder.Path = $"data/wow/search/creature";
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+            query["namespace"] = requiredNamespace;
+            query["locale"] = locale;
+            query["orderby"] = orderBy + ":" + sortOrder;
+            query["_page"] = page.ToString();
+            query["name.en_US"] = name;
+            uriBuilder.Query = query.ToString();
 
-            var auctionApiResponse = JsonConvert.DeserializeObject<AuctionApiResponse>(response.Content);
-            fileUrl = auctionApiResponse.files.First().url;
-            return fileUrl;
+            var request = CreateHttpRequest(HttpMethod.Get, uriBuilder.Uri);
+
+            var response = httpClient.SendAsync(request).Result;
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (content != null)
+            {
+                PaginatedResult result = JsonConvert.DeserializeObject<PaginatedResult>(content);
+                if (result.results != null && result.results.Count > 0)
+                {
+                    Console.WriteLine("Récupération des résultats de la recherche OK");
+                    return result;
+                }
+            }
+
+            Console.WriteLine("Récupération des résultats de la recherche KO");
+            return null;
         }
 
-        public static List<Auction> GetAuctions(string fileUrl)
-        {
-            var client = new RestClient(fileUrl);
-            var request = new RestRequest(Method.GET);
-            IRestResponse response = client.Execute(request);
 
-            return JsonConvert.DeserializeObject<AuctionFileContents>(response.Content).auctions;
+        /// <summary>
+        /// Gets the creature by identifier.
+        /// </summary>
+        /// <param name="requiredNamespace">The required namespace.</param>
+        /// <param name="locale">The locale.</param>
+        /// <param name="creatureId">The creature identifier.</param>
+        /// <returns></returns>
+        public static async Task<Creature> GetCreatureById(string requiredNamespace, string locale, int creatureId)
+        {
+            Console.WriteLine("Début de la recherche d'une créature via son ID");
+            UriBuilder uriBuilder = new UriBuilder(baseURL);
+            uriBuilder.Path = $"data/wow/creature/" + creatureId.ToString();
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+            query["namespace"] = requiredNamespace;
+            query["locale"] = locale;
+            uriBuilder.Query = query.ToString();
+
+            var request = CreateHttpRequest(HttpMethod.Get, uriBuilder.Uri);
+
+            var response = httpClient.SendAsync(request).Result;
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (content != null)
+            {
+                Creature result = JsonConvert.DeserializeObject<Creature>(content);
+                if (result != null)
+                {
+                    Console.WriteLine("Récupération de la créature OK");
+                    return result;
+                }
+            }
+
+            Console.WriteLine("Récupération de la créature KO");
+            return null;
+        }
+
+        /// <summary>
+        /// Creates the HTTP request asynchronous.
+        /// </summary>
+        /// <param name="method">The method.</param>
+        /// <param name="url">The URL.</param>
+        /// <returns>
+        /// The http request message
+        /// </returns>
+        private static HttpRequestMessage CreateHttpRequest(HttpMethod method, Uri url)
+        {
+            var message = new HttpRequestMessage(method, url);
+            message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            return message;
         }
     }
 }
